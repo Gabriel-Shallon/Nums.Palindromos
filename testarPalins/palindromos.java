@@ -2,34 +2,34 @@ package testarPalins;
 
 import javax.swing.JOptionPane;
 
-public class palindromos{
+public class palindromos extends ehpalindromo {
     
-    protected int numero;
-    protected int[] palindromos = new int[Integer.parseInt(JOptionPane.showInputDialog(null, "Quantos números serão testados?"))];
-    
+    private int[] palindromos;
+    private int iniciNum;
 
-    public palindromos() {
-        this.palindromos = PrimeirosPalindromos();
+    public palindromos(int palindromoslength) {
+        this.palindromos = primeirosPalindromos(palindromoslength);
     }
-
     
-    public int[] PrimeirosPalindromos(){
-        int iniciNum = Integer.parseInt(JOptionPane.showInputDialog(null, "A partir de qual número irá descobrir os primeiros "+palindromos.length+" palindromos?"));
+    public int[] primeirosPalindromos(int palindromoslength) {
+        int[] palindromos = new int[palindromoslength];
+        iniciNum = Integer.parseInt(JOptionPane.showInputDialog(null, "A partir de qual número irá descobrir os primeiros " + palindromos.length + " palíndromos?"));
         int passVet = 0;
 
-        while ( passVet != palindromos.length){
-            numero = iniciNum+passVet;
-            ehpalindromo palin = new ehpalindromo(numero); 
-            
-            if (palin.EhPalindromo(numero) == true){
+        while (passVet != palindromos.length) {
+            int numero = iniciNum + passVet;
+            if (ehPalindromo(numero)) {
                 palindromos[passVet] = numero;
                 passVet++;
             }
+            else {
+                iniciNum++;
+            }
         }
-        
         return palindromos;
     }
 
-
-    
+    public int[] getPalindromos() {
+        return palindromos;
+    }
 }
